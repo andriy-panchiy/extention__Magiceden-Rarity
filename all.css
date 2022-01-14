@@ -1,0 +1,37 @@
+.item-thumb{position: relative;}
+.card-img-top{opacity:0.2;}
+.options{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    pointer-events: none;
+}
+.rank, .rarity, .explain{
+    display: block;
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: rgba(0,0,0,0.5);
+    z-index: 999;
+    font-size: 12px;
+    line-height: 12px;
+    font-family: var(--secondary-font);
+    font-weight: 800;
+    float: left;
+    margin-bottom: 4px;
+    margin-right: 10px;
+}
+.rarity{float: right;}
+.rank:last-child, .rarity{margin-right: 0;}
+[data-rank_explain][data-rank_explain="2"]{outline: solid #9901F6 10px;}
+[data-rank_explain][data-rank_explain="3"]{outline: solid #FF8406 10px;}
+[data-rank_explain][data-rank_explain="4"]{outline: solid #ED2939 10px;}
+[data-rarity="Legendary"]{outline: solid #FF8406 10px !important;}
+[data-rarity="Mythic"]{outline: solid #ED2939 10px !important;}
+.Mythic span, .options .explain{background-color: #ED2939;}
+.Legendary span{background-color: #FF8406;}
+.Epic span{background-color: #9901F6;}
+.Rare span{background-color: #01B2FF;}
+.Uncommon span{background-color: #3DD997;}
+.Common span{background-color: #939393;}

@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+	"name": "Magiceden.io Rarity",
+    "short_name": "MR",
+    "version": "1.0.2",
+	"description": "Magiceden.io Rarity",
+    "content_scripts": [{
+        "matches": [
+            "*://*.magiceden.io/*",
+            "*://*.magiceden.io/marketplace/*",
+            "*://*.magicede,n.io/item-details/*"
+        ],
+        "css": ["all.css"],
+        "js": ["script.js"],
+        "run_at": "document_end"
+    }],
+    "browser_action": {
+        "default_title": "Magiceden.io Rarity",
+        "default_icon": "/icons/128logo.png",
+        "default_popup": "/popup/settings.html"
+    },
+	"background": {
+	    "scripts": ["jquery.js","background.js"],
+		"persistent": false
+	},
+    "permissions": [
+        "https://moonrank.app/collection/*",
+        "*://*.magiceden.io/*",
+        "*://*.magiceden.io/marketplace/*",
+        "*://*.magicede,n.io/item-details/*",
+        "storage"
+    ],
+    "icons": {
+        "16": "/icons/16logo.png",
+        "48": "/icons/48logo.png",
+       "128": "/icons/128logo.png"
+    }
+}
