@@ -43,18 +43,17 @@ function MainScript() {
                 if (!self.url || self.url != window.location.href && (self.isDetails() || self.isMarketplace())) {
                     self.collection = await self.getCollection();
                     self.base = await self.loadBase(self.collection);
-                    self.MythicPercs = self.getMythicPercs();
+                    self.MythicPercsMAX = self.getMythicPercsMax();
                     setInterval(() => { self.buildRares() }, 200);
                 }
                 self.url = window.location.href;
             },
-            getMythicPercs: function() {
+            getMythicPercsMax: function() {
                 let self = this;
                 if (!self.base) return;
                 let Mythic = self.base.filter(mint => mint.rank < self.base.length / 100 * 1);
                 let MythicValuePerc = Mythic.map(r => r.rank_explain[0].value_perc).sort();
-                let MythicPercsMAX = MythicValuePerc[MythicValuePerc.length - 1];
-                return [...new Set(self.base.map(r => r.rank_explain.filter(attr => attr.value_perc <= MythicPercsMAX).map(v => v.value)).flat())];
+                return MythicValuePerc[MythicValuePerc.length - 1];
             },
             getCollection: async function(){
                 let self = this;
@@ -101,8 +100,8 @@ function MainScript() {
                     let rank_explain = 0;
                     options.classList.add("options", rarity);
                     options.innerHTML = `<span class="rarity">${rarity}</span><span class="rank">#${info.rank}</span>`
-                    info.rank_explain.filter(explain => self.MythicPercs.includes(explain.value)).forEach(explain => {
-                        options.innerHTML += `<span class="explain">${explain.attribute}: ${explain.value}</span>`
+                    info.rank_explain.filter(explain => explain.value_perc <= self.MythicPercsMAX).forEach(explain => {
+                        options.innerHTML += `<span class="explain">${explain.attribute}: ${explain.value || '∅'}</span>`
                         rank_explain++;
                     });
                     item.appendChild(options);
